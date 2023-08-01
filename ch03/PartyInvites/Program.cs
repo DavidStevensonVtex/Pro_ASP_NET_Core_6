@@ -6,7 +6,7 @@ namespace PartyInvites
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             // Add services to the container.
             builder.Services.AddRazorPages();
