@@ -6,7 +6,9 @@ namespace FirstProject.Controllers
 	{
 		public ViewResult Index()
 		{
-			return View("MyView");
+			int hour = DateTime.Now.Hour;
+			string viewModel = hour < 12 ? "Good Morning" : "Good Afternoon";
+			return View("MyView", viewModel);
 		}
 	}
 }
