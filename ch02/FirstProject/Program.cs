@@ -6,8 +6,11 @@ namespace FirstProject
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
+			builder.Services.AddControllersWithViews();
+
 			// Add services to the container.
 			builder.Services.AddRazorPages();
+
 
 			var app = builder.Build();
 
@@ -16,13 +19,23 @@ namespace FirstProject
 			{
 				app.UseExceptionHandler("/Error");
 			}
+
 			app.UseStaticFiles();
 
 			app.UseRouting();
 
-			app.UseAuthorization();
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+			});
 
-			app.MapRazorPages();
+			//app.UseAuthorization();
+
+			app.MapControllerRoute(
+				name: "default",
+				pattern: "{controller=Home}/{action=Index}/{id?}");
+
+			//app.MapRazorPages();
 
 			app.Run();
 		}
