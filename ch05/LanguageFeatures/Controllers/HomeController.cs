@@ -13,8 +13,12 @@
                 new Product { Name = "Corner flag", Price = 34.95M }
             };
 
-            decimal arrayTotal = productArray.FilterByPrice(20).TotalPrices();
-            return View(new string[] { $"Array Total: {arrayTotal:C2}" } );
+            decimal priceFilterTotal = productArray.FilterByPrice(20).TotalPrices();
+            decimal nameFilterTotal = productArray.FilterByName('S').TotalPrices();
+            return View(new string[] { 
+                $"Price Total: {priceFilterTotal:C2}",
+                $"Name Total: {nameFilterTotal:C2}"
+            } );
         }
     }
 }
