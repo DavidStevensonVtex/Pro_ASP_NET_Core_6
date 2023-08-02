@@ -6,6 +6,8 @@ namespace LanguageFeatures
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
             // Add services to the container.
             builder.Services.AddRazorPages();
 
@@ -22,7 +24,9 @@ namespace LanguageFeatures
 
             app.UseAuthorization();
 
-            app.MapRazorPages();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
