@@ -2,6 +2,11 @@
 {
     public class HomeController : Controller
     {
+        private bool FilterByPrice(Product? p)
+        {
+            return (p?.Price ?? 0) >= 20;
+        }
+
         public ViewResult Index()
         {
             ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
@@ -13,8 +18,13 @@
                 new Product { Name = "Corner flag", Price = 34.95M }
             };
 
-            decimal priceFilterTotal = productArray.FilterByPrice(20).TotalPrices();
-            decimal nameFilterTotal = productArray.FilterByName('S').TotalPrices();
+            Func<Product?, bool> nameFilter = delegate (Product? prod)
+            {
+                return prod?.Name?[0] == 'S';
+            };
+
+            decimal priceFilterTotal = productArray.Filter(FilterByPrice).TotalPrices();
+            decimal nameFilterTotal = productArray.Filter(nameFilter).TotalPrices();
             return View(new string[] { 
                 $"Price Total: {priceFilterTotal:C2}",
                 $"Name Total: {nameFilterTotal:C2}"
