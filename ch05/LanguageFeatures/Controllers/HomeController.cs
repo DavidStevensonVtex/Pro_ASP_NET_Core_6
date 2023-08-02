@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using LanguageFeatures.Models;
-
-namespace LanguageFeatures.Controllers
+﻿namespace LanguageFeatures.Controllers
 {
     public class HomeController : Controller
     {
