@@ -4,7 +4,7 @@
     {
         public ViewResult Index()
         {
-            Product[] products = Product.GetProducts();
+            Product?[] products = Product.GetProducts();
             return View(new string[] { products[0].Name });
         }
     }
