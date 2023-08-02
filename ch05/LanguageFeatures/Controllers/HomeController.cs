@@ -5,13 +5,7 @@
         public ViewResult Index()
         {
             Product?[] products = Product.GetProducts();
-
-            string? val = products[0]?.Name;
-            if ( val != null)
-            {
-                return View(new string[] { val });
-            }
-            return View(new string[] { "No Value" });
+            return View(new string[] { products[0]?.Name ?? "No Value" });
         }
     }
 }
