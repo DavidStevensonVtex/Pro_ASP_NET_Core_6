@@ -11,7 +11,7 @@
                 new { Name = "Soccer ball", Price = 19.50M },
                 new { Name = "Corner flag", Price = 34.95M }
             };
-            return View(products.Select(p => p.Name));
+            return View(products.Select(p => p.GetType().Name));
         }
     }
 }
