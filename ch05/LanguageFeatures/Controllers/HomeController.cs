@@ -5,7 +5,7 @@
         public ViewResult Index()
         {
             Product?[] products = Product.GetProducts();
-            return View(new string[] { products[0]!.Name });
+            return View(new string[] { $"Name: {products[0]?.Name}, Price: {products[0]?.Price}" });
         }
     }
 }
