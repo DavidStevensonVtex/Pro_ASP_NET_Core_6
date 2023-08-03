@@ -5,9 +5,10 @@ namespace Testing.Controllers
 {
 	public class HomeController : Controller
 	{
+		public IDataSource dataSource = new ProductDataSource();
 		public IActionResult Index()
 		{
-			return View(Product.GetProducts());
+			return View(dataSource.Products);
 		}
 	}
 }
