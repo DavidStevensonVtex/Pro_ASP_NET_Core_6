@@ -9,8 +9,10 @@ namespace Testing.Tests
 {
     public class Comparer
     {
-        public static Comparer<U?> Get<U>(Func<U?, U?, bool> func) {
-            return new Comparer<U?>(Func) ;
+        public static Comparer<U?> Get<U>(Func<U?, U?, bool> func)
+        {
+            return new Comparer<U?>(func);
+        }
     }
 
     public class Comparer<T> : Comparer, IEqualityComparer<T>
