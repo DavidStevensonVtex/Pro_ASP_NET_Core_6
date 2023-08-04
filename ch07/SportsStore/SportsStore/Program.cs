@@ -31,6 +31,10 @@ namespace SportsStore
 
             app.UseAuthorization();
 
+            app.MapControllerRoute("pagination",
+                "Products/Page{productPage}",
+                new { Controller = "Home", action = "Index" });
+
             app.MapDefaultControllerRoute();
 
             SeedData.EnsurePopulated(app);
