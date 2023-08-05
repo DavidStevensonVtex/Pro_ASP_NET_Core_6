@@ -19,6 +19,8 @@ namespace SportsStore
             builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
 
             builder.Services.AddRazorPages();
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -28,6 +30,7 @@ namespace SportsStore
                 app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
