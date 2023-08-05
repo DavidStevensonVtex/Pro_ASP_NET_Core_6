@@ -35,6 +35,5 @@ namespace SportsStore.Controllers
                 },
                 CurrentCategory = category
             });
-
 	}
 }

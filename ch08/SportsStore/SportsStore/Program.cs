@@ -18,6 +18,8 @@ namespace SportsStore
 
             builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
 
+            builder.Services.AddRazorPages();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -46,6 +48,7 @@ namespace SportsStore
                 new { Controller = "Home", action = "Index", productPage = 1 });
 
             app.MapDefaultControllerRoute();
+            app.MapRazorPages();
 
             SeedData.EnsurePopulated(app);
 
