@@ -31,6 +31,8 @@ namespace SportsStore
             }
             app.UseStaticFiles();
             app.UseSession();
+            builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             app.UseRouting();
 
