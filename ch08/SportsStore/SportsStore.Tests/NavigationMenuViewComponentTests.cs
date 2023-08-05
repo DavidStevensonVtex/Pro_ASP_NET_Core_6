@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using SportsStore.Models;
-using SportsStore.Controllers;
-using Xunit;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using SportsStore.Infrastructure;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
-using SportsStore.Components;
 using Microsoft.AspNetCore.Routing;
+using Moq;
+using SportsStore.Components;
+using SportsStore.Models;
 
 namespace SportsStore.Tests
 {
-	public class NavigationMenuViewComponentTests
+    public class NavigationMenuViewComponentTests
 	{
 		[Fact]
 		public void Can_Select_Categories()

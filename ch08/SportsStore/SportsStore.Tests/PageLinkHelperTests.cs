@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using SportsStore.Models;
-using SportsStore.Controllers;
-using Xunit;
-using Microsoft.AspNetCore.Mvc.Routing;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SportsStore.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Moq;
+using SportsStore.Infrastructure;
 
 namespace SportsStore.Tests
 {
-	public class PageLinkHelperTests
+    public class PageLinkHelperTests
 	{
 		[Fact]
 		public void Can_Generate_Page_Links()

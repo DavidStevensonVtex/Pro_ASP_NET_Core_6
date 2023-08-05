@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
-using SportsStore.Models;
 using SportsStore.Controllers;
-using Xunit;
+using SportsStore.Models;
 using SportsStore.Models.ViewModels;
 
 namespace SportsStore.Tests
 {
-	public class HomeControllerTests
+    public class HomeControllerTests
 	{
 		[Fact]
 		public void Can_Use_Repository()
