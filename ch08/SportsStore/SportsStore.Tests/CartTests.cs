@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using SportsStore.Models;
-using SportsStore.Controllers;
-using Xunit;
-using SportsStore.Models.ViewModels;
+﻿using SportsStore.Models;
 
 namespace SportsStore.Tests
 {
