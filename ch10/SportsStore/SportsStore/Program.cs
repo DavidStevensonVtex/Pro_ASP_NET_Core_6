@@ -24,6 +24,7 @@ namespace SportsStore
             builder.Services.AddSession();
             builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddServerSideBlazor();
 
             var app = builder.Build();
 
