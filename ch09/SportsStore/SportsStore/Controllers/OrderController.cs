@@ -4,6 +4,6 @@ namespace SportsStore.Controllers
 {
     public class OrderController : Controller
     {
-        public ViewResult Index() => View();
+        public ViewResult Checkout() => View();
     }
 }
