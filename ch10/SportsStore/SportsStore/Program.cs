@@ -55,6 +55,8 @@ namespace SportsStore
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
+            app.MapBlazorHub();
+            app.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
 
             SeedData.EnsurePopulated(app);
 
