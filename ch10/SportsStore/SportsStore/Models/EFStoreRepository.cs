@@ -25,7 +25,7 @@
 
         public void SaveProduct(Product p)
         {
-            context.SaveChanges(p);
+            context.SaveChanges();
         }
     }
 }
