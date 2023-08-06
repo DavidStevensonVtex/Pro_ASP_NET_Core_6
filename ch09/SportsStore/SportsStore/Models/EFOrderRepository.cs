@@ -1,4 +1,6 @@
-﻿namespace SportsStore.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SportsStore.Models
 {
 	public class EFOrderRepository : IOrderRepository
 	{
@@ -9,7 +11,8 @@
 		}
 
 
-		public IQueryable<Order> Orders => context.Orders;
+		public IQueryable<Order> Orders =>
+			context.Orders.Include(o => o.Lines).ThenInclude(l => l.Product);
 
 		public void SaveOrder(Order order)
 		{
