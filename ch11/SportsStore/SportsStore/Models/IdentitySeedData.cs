@@ -8,7 +8,7 @@ namespace SportsStore.Models
 		private const string adminUser = "ADmin";
 		private const string adminPassword = "Secret123$";
 
-		private static async void EnsurePopulated(IApplicationBuilder app)
+		public static async void EnsurePopulated(IApplicationBuilder app)
 		{
 			AppIdentityDbContext context = app.ApplicationServices
 				.CreateScope().ServiceProvider
