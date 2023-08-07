@@ -7,7 +7,7 @@ namespace Platform
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            //builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
@@ -20,9 +20,11 @@ namespace Platform
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
-            app.MapRazorPages();
+            app.MapGet("/", () => "Hello, World!");
+
+            //app.MapRazorPages();
 
             app.Run();
         }
