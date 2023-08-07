@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using SportsStore.Models;
 
 namespace SportsStore
@@ -26,6 +27,11 @@ namespace SportsStore
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddServerSideBlazor();
 
+            builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseSqlServer(builder.Configuration["ConnectionStrings:IdentityConnection"]));
+            builder.Services.AddIdentity<IdentityUser, IdentityRole> ()
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -38,6 +44,7 @@ namespace SportsStore
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute("catpage",
