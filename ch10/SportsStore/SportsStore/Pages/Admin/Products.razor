@@ -23,6 +23,9 @@
                         <NavLink class="btn btn-warning btn-sm" href="@GetEditUrl(p.ProductID ?? 0)">
                             Edit
                         </NavLink>
+                        <NavLink class="btn btn-danger btn-sm" @onclick="@(e => DeleteProduct(p))">
+                            Delete
+                        </NavLink>
                     </td>
                 </tr>
             }
@@ -51,6 +54,12 @@
     public async Task UpdateData()
     {
         ProductData = await Repository.Products.ToListAsync();
+    }
+
+    public async Task DeleteProduct(Product p)
+    {
+        Repository.DeleteProduct(p);
+        await UpdateData();
     }
 
     public string GetDetailsUrl(long id) => $"/admin/products/details/{id}";
