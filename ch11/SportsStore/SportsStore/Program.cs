@@ -34,11 +34,19 @@ namespace SportsStore
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (!app.Environment.IsProduction())
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/error");
             }
+
+            app.UseRequestLocalization(opts =>
+            {
+                opts.AddSupportedCultures("en-US")
+                    .AddSupportedUICultures("en-US")
+                    .SetDefaultCulture("en-US");
+            });
+
+
             app.UseStaticFiles();
             app.UseSession();
 
