@@ -9,12 +9,7 @@ namespace Platform
 
             ((IApplicationBuilder)app).Map("/branch", branch =>
             {
-                branch.UseMiddleware<Platform.QueryStringMiddleware>();
-
-                branch.Run(async (context) =>
-                {
-					await context.Response.WriteAsync($"Branch middleware");
-				});
+                branch.Run(new Platform.QueryStringMiddleware().Invoke);
             });
 
             app.UseMiddleware<QueryStringMiddleware>();
