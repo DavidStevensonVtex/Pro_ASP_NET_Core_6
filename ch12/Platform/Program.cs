@@ -11,10 +11,10 @@ namespace Platform
             {
                 branch.UseMiddleware<Platform.QueryStringMiddleware>();
 
-                branch.Use(async (HttpContext context, Func<Task> next) =>
+                branch.Run(async (context) =>
                 {
-                    await context.Response.WriteAsync($"Branch middleware");
-                });
+					await context.Response.WriteAsync($"Branch middleware");
+				});
             });
 
             app.UseMiddleware<QueryStringMiddleware>();
