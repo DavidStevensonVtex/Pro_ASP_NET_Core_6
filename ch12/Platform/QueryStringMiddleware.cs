@@ -21,7 +21,11 @@
 			{
 				await context.Response.WriteAsync("Class-based Middleware \n");
 			}
-			await next(context);
+
+			if (next != null)
+			{
+				await next(context);
+			}
 		}
 	}
 }
