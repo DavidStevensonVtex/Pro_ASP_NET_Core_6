@@ -2,7 +2,12 @@
 {
 	public class QueryStringMiddleware
 	{
-		private RequestDelegate next;
+		private RequestDelegate? next;
+
+		public QueryStringMiddleware()
+		{
+			// do nothing
+		}
 
 		public QueryStringMiddleware(RequestDelegate nextDelegate)
 		{
