@@ -20,8 +20,8 @@ namespace Platform
                 }
             });
 
-			app.MapGet("capital/uk", new Capital().Invoke);
-			app.MapGet("population/paris", new Population().Invoke);
+			app.MapGet("capital/uk", Capital.Endpoint);
+			app.MapGet("population/paris", Population.Endpoint);
 
 			app.Run();
         }
