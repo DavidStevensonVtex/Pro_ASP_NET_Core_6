@@ -13,11 +13,7 @@ namespace Platform
 
             var app = builder.Build();
 
-            app.MapGet("/location", async (HttpContext context, IOptions<MessageOptions> msgOpts) =>
-            {
-                MessageOptions opts = msgOpts.Value;
-                await context.Response.WriteAsync($"{opts.CityName}, {opts.CountryName}");
-            });
+            app.UseMiddleware<LocationMiddleware>();
 
             app.MapGet("/", () => "Hello, World!");
 
