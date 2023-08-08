@@ -1,3 +1,6 @@
+using Microsoft.Extensions.Options;
+using System.Net.Mime;
+
 namespace Platform
 {
     public class Program
@@ -5,14 +8,16 @@ namespace Platform
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.Configure<MessageOptions>(options => options.CityName = "Albany");
+
             var app = builder.Build();
 
-            ((IApplicationBuilder)app).Map("/branch", branch =>
+            app.MapGet("/location", async (HttpContext context, IOptions<MessageOptions> msgOpts) =>
             {
-                branch.Run(new Platform.QueryStringMiddleware().Invoke);
+                MessageOptions opts = msgOpts.Value;
+                await context.Response.WriteAsync($"{opts.CityName}, {opts.CountryName}");
             });
-
-            app.UseMiddleware<QueryStringMiddleware>();
 
             app.MapGet("/", () => "Hello, World!");
 
