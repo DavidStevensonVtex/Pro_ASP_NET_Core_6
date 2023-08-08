@@ -13,9 +13,12 @@ namespace Platform
 
             var app = builder.Build();
 
-            app.UseMiddleware<LocationMiddleware>();
-
-            app.MapGet("/", () => "Hello, World!");
+            app.UseMiddleware<Population>();
+            app.UseMiddleware<Capital>();
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Terminal Middleware Reached");
+            });
 
             app.Run();
         }
