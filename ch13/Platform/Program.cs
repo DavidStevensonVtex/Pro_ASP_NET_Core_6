@@ -11,9 +11,9 @@ namespace Platform
 
             var app = builder.Build();
 
-            app.MapGet("{first}/{second}/{third}", async context =>
+            app.MapGet("files/{filename}.{ext}", async context =>
             {
-                await context.Response.WriteAsync("Request was routed\n");
+                await context.Response.WriteAsync("Request Was Routed\n");
                 foreach (var kvp in context.Request.RouteValues)
                 {
                     await context.Response.WriteAsync($"{kvp.Key}: {kvp.Value}\n");
