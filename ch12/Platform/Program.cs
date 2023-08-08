@@ -5,57 +5,21 @@ namespace Platform
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            //builder.Services.AddRazorPages();
-
             var app = builder.Build();
 
-            app.Use(async (context, next) =>
+            ((IApplicationBuilder)app).Map("/branch", branch =>
             {
-                await next();
-                await context.Response.WriteAsync($"\nStatus Code: {context.Response.StatusCode}");
-            });
+                branch.UseMiddleware<Platform.QueryStringMiddleware>();
 
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path == "/short")
+                branch.Use(async (HttpContext context, Func<Task> next) =>
                 {
-                    await context.Response.WriteAsync("Request Short Circuited");
-                }
-                else
-                {
-                    await next();
-                }
-            });
-
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Method == HttpMethods.Get &&
-                    context.Request.Query["custom"] == "true")
-                {
-                    context.Response.ContentType = "text/plain";
-                    await context.Response.WriteAsync("Custom Middleware \n");
-                }
-                await next();
+                    await context.Response.WriteAsync($"Branch middleware");
+                });
             });
 
             app.UseMiddleware<QueryStringMiddleware>();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-            }
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            //app.UseAuthorization();
-
             app.MapGet("/", () => "Hello, World!");
-
-            //app.MapRazorPages();
 
             app.Run();
         }
