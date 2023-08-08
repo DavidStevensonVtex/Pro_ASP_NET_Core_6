@@ -13,28 +13,20 @@ namespace Platform
 
             var app = builder.Build();
 
-            //app.UseMiddleware<Population>();
-            //app.UseMiddleware<Capital>();
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
+            app.MapGet("routing", async context =>
             {
-                endpoints.MapGet("routing", async context =>
-                {
-                    await context.Response.WriteAsync("Request Was Routed");
-                });
-
-                endpoints.MapGet("capital/uk", new Capital().Invoke);
-                endpoints.MapGet("population/paris", new Population().Invoke);
+                await context.Response.WriteAsync("Request Was Routed");
             });
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Terminal Middleware Reached");
-            });
+			app.MapGet("capital/uk", new Capital().Invoke);
+			app.MapGet("population/paris", new Population().Invoke);
 
-            app.Run();
+			//app.Run(async (context) =>
+			//{
+			//	await context.Response.WriteAsync("Terminal Middleware Reached");
+			//});
+
+			app.Run();
         }
     }
 }
