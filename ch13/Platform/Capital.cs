@@ -15,8 +15,13 @@
 					capital = "Paris";
 					break;
 				case "monaco":
-					context.Response.Redirect($"/population/{country}");
-					break;
+					LinkGenerator? generator = context.RequestServices.GetService<LinkGenerator>();
+					string? url = generator?.GetPathByRouteValues(context, "population", new { city = country });
+					if (url != null)
+					{
+						context.Response.Redirect(url);
+					}
+					return;
 			}
 			if (capital != null)
 			{
