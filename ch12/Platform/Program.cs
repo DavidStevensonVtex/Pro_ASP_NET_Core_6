@@ -22,6 +22,8 @@ namespace Platform
                 await next();
             });
 
+            app.UseMiddleware<QueryStringMiddleware>();
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
