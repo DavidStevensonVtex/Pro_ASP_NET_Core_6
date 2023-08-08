@@ -26,6 +26,11 @@ namespace Platform
                 });
             });
 
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Terminal Middleware Reached");
+            });
+
             app.Run();
         }
     }
