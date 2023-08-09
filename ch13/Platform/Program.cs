@@ -22,9 +22,14 @@ namespace Platform
                 }
             });
 
-			app.MapGet("capital/{country:countryName}", Capital.Endpoint);
-            app.MapGet("size/{city?}", Population.Endpoint)
-                .WithMetadata(new RouteNameMetadata("population"));
+            app.Map("{number:int}", async context =>
+            {
+                await context.Response.WriteAsync("Routed to the int endpoint");
+            });
+            app.Map("{number:double}", async context =>
+            {
+                await context.Response.WriteAsync("Routed to the double endpoint");
+            });
 
             app.MapFallback(async context =>
             {
