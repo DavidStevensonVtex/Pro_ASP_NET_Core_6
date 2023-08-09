@@ -13,23 +13,31 @@ namespace Platform
 
             var app = builder.Build();
 
-            app.MapGet("{first:alpha:length(3)}/{second:bool}", async context =>
+            app.Use(async (context, next) =>
             {
-                await context.Response.WriteAsync("Request Was Routed\n");
-                foreach (var kvp in context.Request.RouteValues)
+                Endpoint? end = context.GetEndpoint();
+                if (end != null)
                 {
-                    await context.Response.WriteAsync($"{kvp.Key}: {kvp.Value}\n");
+                    await context.Response.WriteAsync($"{end.DisplayName} Selected \n");
                 }
+                else
+                {
+                    await context.Response.WriteAsync("No Endpoint Selected \n");
+                }
+                await next();
             });
 
             app.Map("{number:int}", async context =>
             {
                 await context.Response.WriteAsync("Routed to the int endpoint");
-            }).Add(b => ((RouteEndpointBuilder)b).Order = 1);
+            }).WithDisplayName("Int Endpoint")
+                .Add(b => ((RouteEndpointBuilder)b).Order = 1);
+
             app.Map("{number:double}", async context =>
             {
                 await context.Response.WriteAsync("Routed to the double endpoint");
-			}).Add(b => ((RouteEndpointBuilder)b).Order = 2);
+			}).WithDisplayName("Double Endpoint")
+				.Add(b => ((RouteEndpointBuilder)b).Order = 2);
 
 			app.MapFallback(async context =>
             {
