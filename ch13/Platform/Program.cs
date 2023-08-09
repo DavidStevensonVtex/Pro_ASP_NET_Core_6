@@ -8,21 +8,22 @@ namespace Platform
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddSingleton<IResponseFormatter, HtmlResponseFormatter>();
+
             var app = builder.Build();
 
             app.UseMiddleware<WeatherMiddleware>();
 
-            //IResponseFormatter formatter = new TextResponseFormatter();
-            app.MapGet("middleware/function", async (context) =>
+            app.MapGet("middleware/function", async (HttpContext context, IResponseFormatter formatter) =>
             {
-                await TypeBroker.Formatter.Format(context, "Middleware Function: It is snowing in Chicago");
+                await formatter.Format(context, "Middleware Function: It is snowing in Chicago");
             });
 
             app.MapGet("endpoint/class", WeatherEndpoint.Endpoint);
 
-            app.MapGet("endpoint/function", async context =>
+            app.MapGet("endpoint/function", async (HttpContext context, IResponseFormatter formatter) =>
             {
-                await TypeBroker.Formatter.Format(context, "Endpoint Function: It is sunny in LA");
+                await formatter.Format(context, "Endpoint Function: It is sunny in LA");
             });
 
 			app.Run();
