@@ -11,7 +11,7 @@ namespace Platform
 
             var app = builder.Build();
 
-            app.MapGet("{first}/{second}/{*catchall}", async context =>
+            app.MapGet("{first:int}/{second:bool}", async context =>
             {
                 await context.Response.WriteAsync("Request Was Routed\n");
                 foreach (var kvp in context.Request.RouteValues)
