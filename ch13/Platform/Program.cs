@@ -1,3 +1,5 @@
+using Platform.Services;
+
 namespace Platform
 {
 	public class Program
@@ -6,42 +8,21 @@ namespace Platform
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.Configure<RouteOptions>(opts =>
-            {
-                opts.ConstraintMap.Add("countryName", typeof(CountryRouteConstraint));
-            });
-
             var app = builder.Build();
 
-            app.Use(async (context, next) =>
+            app.UseMiddleware<WeatherMiddleware>();
+
+            IResponseFormatter formatter = new TextResponseFormatter();
+            app.MapGet("middleware/function", async (context) =>
             {
-                Endpoint? end = context.GetEndpoint();
-                if (end != null)
-                {
-                    await context.Response.WriteAsync($"{end.DisplayName} Selected \n");
-                }
-                else
-                {
-                    await context.Response.WriteAsync("No Endpoint Selected \n");
-                }
-                await next();
+                await formatter.Format(context, "Middleware Function: It is snowing in Chicago");
             });
 
-            app.Map("{number:int}", async context =>
-            {
-                await context.Response.WriteAsync("Routed to the int endpoint");
-            }).WithDisplayName("Int Endpoint")
-                .Add(b => ((RouteEndpointBuilder)b).Order = 1);
+            app.MapGet("endpoint/class", WeatherEndpoint.Endpoint);
 
-            app.Map("{number:double}", async context =>
+            app.MapGet("endpoint/function", async context =>
             {
-                await context.Response.WriteAsync("Routed to the double endpoint");
-			}).WithDisplayName("Double Endpoint")
-				.Add(b => ((RouteEndpointBuilder)b).Order = 2);
-
-			app.MapFallback(async context =>
-            {
-                await context.Response.WriteAsync("Routed to fallback endpoint");
+                await context.Response.WriteAsync("Endpoint Function: It is sunny in LA");
             });
 
 			app.Run();

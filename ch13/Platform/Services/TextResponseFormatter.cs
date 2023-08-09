@@ -1,8 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Platform.Services
+﻿namespace Platform.Services
 {
-	public class TestResponseFormatter : IResponseFormatter
+	public class TextResponseFormatter : IResponseFormatter
 	{
 		private int responseCounter = 0;
 
