@@ -1,13 +1,15 @@
-using Microsoft.Extensions.Options;
-using System.Net.Mime;
-
 namespace Platform
 {
-    public class Program
+	public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.Configure<RouteOptions>(opts =>
+            {
+                opts.ConstraintMap.Add("countryName", typeof(CountryRouteConstraint));
+            });
 
             var app = builder.Build();
 
@@ -20,7 +22,7 @@ namespace Platform
                 }
             });
 
-			app.MapGet("capital/{country:regex(^uk|france|monaco)}", Capital.Endpoint);
+			app.MapGet("capital/{country:countryName}", Capital.Endpoint);
             app.MapGet("size/{city?}", Population.Endpoint)
                 .WithMetadata(new RouteNameMetadata("population"));
 
