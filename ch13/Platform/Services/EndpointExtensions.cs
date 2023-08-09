@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Platform.Services
+﻿namespace Platform.Services
 {
 	public static class EndpointExtensions
 	{
