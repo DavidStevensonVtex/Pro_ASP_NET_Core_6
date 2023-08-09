@@ -12,17 +12,17 @@ namespace Platform
 
             app.UseMiddleware<WeatherMiddleware>();
 
-            IResponseFormatter formatter = new TextResponseFormatter();
+            //IResponseFormatter formatter = new TextResponseFormatter();
             app.MapGet("middleware/function", async (context) =>
             {
-                await formatter.Format(context, "Middleware Function: It is snowing in Chicago");
+                await TextResponseFormatter.Singleton.Format(context, "Middleware Function: It is snowing in Chicago");
             });
 
             app.MapGet("endpoint/class", WeatherEndpoint.Endpoint);
 
             app.MapGet("endpoint/function", async context =>
             {
-                await context.Response.WriteAsync("Endpoint Function: It is sunny in LA");
+                await TextResponseFormatter.Singleton.Format(context, "Endpoint Function: It is sunny in LA");
             });
 
 			app.Run();
