@@ -20,7 +20,7 @@ namespace Platform
                 }
             });
 
-			app.MapGet("capital/{country=France}", Capital.Endpoint);
+			app.MapGet("capital/{country:regex(^uk|france|monaco)}", Capital.Endpoint);
             app.MapGet("size/{city?}", Population.Endpoint)
                 .WithMetadata(new RouteNameMetadata("population"));
 
