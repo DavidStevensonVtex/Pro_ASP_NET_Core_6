@@ -13,7 +13,14 @@ namespace Microsoft.AspNetCore.Builder
 			}
 
 			T endpointInstance = ActivatorUtilities.CreateInstance<T>(app.ServiceProvider);
-			app.MapGet(path, (RequestDelegate)methodInfo.CreateDelegate(typeof(RequestDelegate), endpointInstance));
+
+			ParameterInfo[] methodParams = methodInfo!.GetParameters();
+
+			app.MapGet(path, context => 
+				(Task) (methodInfo.Invoke(
+					endpointInstance, 
+					methodParams.Select(p => p.ParameterType == typeof(HttpContext) ? context :
+					app.ServiceProvider.GetService(p.ParameterType)).ToArray()))!);
 		}
 	}
 }
