@@ -7,13 +7,11 @@ namespace Platform
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-           
-			builder.Services.AddScoped<IResponseFormatter, GuidService>();
 
-            var app = builder.Build();
+			//builder.Services.AddScoped<IResponseFormatter, GuidService>();
+			builder.Services.AddTransient<IResponseFormatter, GuidService>();
 
-			var scope = app.Services.CreateScope();
-			var service = scope.ServiceProvider.GetService<IResponseFormatter>();
+			var app = builder.Build();
 
 			app.UseMiddleware<WeatherMiddleware>();
 
@@ -25,9 +23,10 @@ namespace Platform
             //app.MapWeather("endpoint/class");
             app.MapEndpoint<WeatherEndpoint>("endpoint/class");
 
-            app.MapGet("endpoint/function", async (HttpContext context, IResponseFormatter formatter) =>
+            app.MapGet("endpoint/function", async (HttpContext context) =>
             {
-                await formatter.Format(context, "Endpoint Function: It is sunny in LA");
+                IResponseFormatter formatter = context.RequestServices.GetRequiredService<IResponseFormatter>();
+				await formatter.Format(context, "Endpoint Function: It is sunny in LA");
             });
 
 			app.Run();
