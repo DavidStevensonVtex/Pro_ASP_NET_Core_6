@@ -7,12 +7,15 @@ namespace Platform
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            builder.Services.AddTransient<IResponseFormatter, GuidService>();
+           
+			builder.Services.AddScoped<IResponseFormatter, GuidService>();
 
             var app = builder.Build();
 
-            app.UseMiddleware<WeatherMiddleware>();
+			var scope = app.Services.CreateScope();
+			var service = scope.ServiceProvider.GetService<IResponseFormatter>();
+
+			app.UseMiddleware<WeatherMiddleware>();
 
             app.MapGet("middleware/function", async (HttpContext context, IResponseFormatter formatter) =>
             {
