@@ -6,7 +6,7 @@ namespace Platform
 	{
 		private RequestDelegate next;
 
-		public WeatherMiddleware(RequestDelegate nextDelegate, IResponseFormatter respFormatter)
+		public WeatherMiddleware(RequestDelegate nextDelegate)
 		{
 			next = nextDelegate;
 		}
