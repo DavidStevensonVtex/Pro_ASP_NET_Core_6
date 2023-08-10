@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Builder
 				throw new System.Exception("Method cannot be used");
 			}
 
-			T endpointInstance = ActivatorUtilities.CreateInstance<T>(app.ServiceProvider);
+			//T endpointInstance = ActivatorUtilities.CreateInstance<T>(app.ServiceProvider);
 
 			ParameterInfo[] methodParams = methodInfo!.GetParameters();
 

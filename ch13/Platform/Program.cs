@@ -8,10 +8,10 @@ namespace Platform
         {
             var builder = WebApplication.CreateBuilder(args);
 
-			//builder.Services.AddScoped<IResponseFormatter, GuidService>();
-			builder.Services.AddTransient<IResponseFormatter, GuidService>();
+            //builder.Services.AddScoped<IResponseFormatter, GuidService>();
+            builder.Services.AddTransient<IResponseFormatter, GuidService>();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
 			app.UseMiddleware<WeatherMiddleware>();
 
