@@ -2,9 +2,9 @@
 {
 	public interface ITimeStamper
 	{
-		string TimeStamp { get; set; }
+		string TimeStamp { get; }
 	}
-	public class TimeStamping
+	public class DefaultTimeStamper : ITimeStamper
 	{
 		public string TimeStamp
 		{
