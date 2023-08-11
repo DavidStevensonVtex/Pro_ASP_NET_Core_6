@@ -6,7 +6,12 @@ namespace Platform
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var app = builder.Build();
+            var servicesConfig = builder.Configuration;
+			// - use configuration settings to set up services
+
+			var app = builder.Build();
+            var pipelineConfig = app.Configuration;
+            // - use configuration settings to set up pipeline
 
             app.MapGet("config", async (HttpContext context, IConfiguration config) =>
             {
