@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.Extensions.FileProviders;
 
 namespace Platform
 {
@@ -14,11 +15,17 @@ namespace Platform
                     HttpLoggingFields.RequestPath | HttpLoggingFields.ResponseStatusCode;
             });
 
-			var app = builder.Build();
+            var app = builder.Build();
 
             app.UseHttpLogging();
 
             app.UseStaticFiles();
+
+            var env = app.Environment;
+            app.UseStaticFiles(new StaticFileOptions {
+                FileProvider = new PhysicalFileProvider ($"{env.ContentRootPath}/staticfiles"),
+                RequestPath = "/files"
+            });
 
             app.MapGet("population/{city?}", Population.Endpoint);
 
