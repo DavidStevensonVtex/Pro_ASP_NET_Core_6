@@ -20,6 +20,8 @@ namespace Platform
             {
                 string defaultDebug = config["Logging:LogLevel:Default"];
                 await context.Response.WriteAsync($"The config setting is: {defaultDebug}");
+                string environ = config["ASPNETCORE_ENVIRONMENT"];
+                await context.Response.WriteAsync($"\nThe env setting is: {environ}");
             });
 
             app.MapGet("/", async context =>
