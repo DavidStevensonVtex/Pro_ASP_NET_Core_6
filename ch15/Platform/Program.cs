@@ -8,13 +8,15 @@ namespace Platform
 
 			var app = builder.Build();
 
-            var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Pipeline");
+            app.UseHttpLogging();
 
-			logger.LogDebug("Pipeline configuration starting");
+   //         var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Pipeline");
+
+			//logger.LogDebug("Pipeline configuration starting");
 
             app.MapGet("population/{city?}", Population.Endpoint);
 
-			logger.LogDebug("Pipeline configuration complete");
+			//logger.LogDebug("Pipeline configuration complete");
 
 			app.Run();
         }
