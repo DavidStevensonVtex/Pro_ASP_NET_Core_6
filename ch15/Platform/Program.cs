@@ -18,13 +18,9 @@ namespace Platform
 
             app.UseHttpLogging();
 
-   //         var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Pipeline");
-
-			//logger.LogDebug("Pipeline configuration starting");
+            app.UseStaticFiles();
 
             app.MapGet("population/{city?}", Population.Endpoint);
-
-			//logger.LogDebug("Pipeline configuration complete");
 
 			app.Run();
         }
