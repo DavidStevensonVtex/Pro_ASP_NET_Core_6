@@ -19,6 +19,7 @@ namespace Platform
 
             var app = builder.Build();
 
+            app.UseHttpsRedirection();
             app.UseSession();
 
             app.UseMiddleware<ConsentMiddleware>();
