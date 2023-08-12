@@ -1,5 +1,4 @@
-using Microsoft.AspNetCore.HttpLogging;
-using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.HostFiltering;
 
 namespace Platform
 {
@@ -8,6 +7,12 @@ namespace Platform
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.Configure<HostFilteringOptions>(opts =>
+            {
+                opts.AllowedHosts.Clear();
+                opts.AllowedHosts.Add("*.example.com");
+            });
 
             var app = builder.Build();
 
