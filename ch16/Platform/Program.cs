@@ -17,6 +17,7 @@ namespace Platform
             var app = builder.Build();
 
             app.UseCookiePolicy();
+            app.UseMiddleware<ConsentMiddleware>();
 
             app.MapGet("/cookie", async context =>
             {
