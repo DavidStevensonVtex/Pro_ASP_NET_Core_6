@@ -30,6 +30,8 @@ namespace Platform
                 opts.UseSqlServer(builder.Configuration["ConnectionStrings:CalcConnection"]);
             });
 
+            builder.Services.AddTransient<SeedData>();
+
             var app = builder.Build();
 
             app.UseResponseCaching();
@@ -41,7 +43,17 @@ namespace Platform
                 await context.Response.WriteAsync("Hello World!");
             });
 
-			app.Run();
+            bool cmdLineInit = (app.Configuration["INITDB"] ?? "false") == "true";
+            if (app.Environment.IsDevelopment() || cmdLineInit)
+            {
+                var seedData = app.Services.GetRequiredService<SeedData>();
+                seedData.SeedDatabase();
+            }
+
+            if (! cmdLineInit )
+            {
+                app.Run();
+            }
         }
     }
 }
