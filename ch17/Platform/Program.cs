@@ -8,6 +8,11 @@ namespace Platform
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDistributedMemoryCache(opts =>
+            {
+                opts.SizeLimit = 200;
+            });
+
             var app = builder.Build();
 
 			app.MapGet("sum/{count:long=1000000000}", SumEndpoint.Endpoint);
