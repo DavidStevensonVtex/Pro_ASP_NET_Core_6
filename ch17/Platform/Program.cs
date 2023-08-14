@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.HostFiltering;
+using Platform.Services;
 
 namespace Platform
 {
@@ -20,7 +21,12 @@ namespace Platform
                 opts.TableName = "DataCache";
             });
 
+            builder.Services.AddResponseCaching();
+            builder.Services.AddSingleton<IResponseFormatter, HtmlResponseFormatter>();
+
             var app = builder.Build();
+
+            app.UseResponseCaching();
 
 			app.MapGet("sum/{count:long=1000000000}", SumEndpoint.Endpoint);
 
