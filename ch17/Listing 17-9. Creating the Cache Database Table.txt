@@ -1,0 +1,3 @@
+dotnet tool install --global dotnet-sql-cache
+
+dotnet sql-cache create "Server=localhost\SQLExpress;Database=CacheDb;Integrated Security=True;TrustServerCertificate=True;" dbo DataCache
