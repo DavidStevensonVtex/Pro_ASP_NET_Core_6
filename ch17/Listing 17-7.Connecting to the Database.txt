@@ -1,0 +1,4 @@
+sqlcmd -S "localhost\SQLExpress"
+CREATE DATABASE CacheDb
+GO
+exit
