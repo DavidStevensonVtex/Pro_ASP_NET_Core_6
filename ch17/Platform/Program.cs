@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.HostFiltering;
 using Platform.Services;
+using Platform.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Platform
 {
@@ -23,6 +24,11 @@ namespace Platform
 
             builder.Services.AddResponseCaching();
             builder.Services.AddSingleton<IResponseFormatter, HtmlResponseFormatter>();
+
+            builder.Services.AddDbContext<CalculationContext>(opts =>
+            {
+                opts.UseSqlServer(builder.Configuration["ConnectionStrings:CalcConnection"]);
+            });
 
             var app = builder.Build();
 
