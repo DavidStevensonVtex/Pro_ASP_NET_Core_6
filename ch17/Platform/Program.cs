@@ -10,6 +10,8 @@ namespace Platform
 
             var app = builder.Build();
 
+			app.MapGet("sum/{count:long=1000000000}", SumEndpoint.Endpoint);
+
             app.MapGet("/", async context =>
             {
                 await context.Response.WriteAsync("Hello World!");

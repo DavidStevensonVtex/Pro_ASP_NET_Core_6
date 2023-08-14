@@ -1,8 +1,8 @@
 ﻿namespace Platform
 {
-	public class SumEndpoint
+	public static class SumEndpoint
 	{
-		public async Task Endpoint(HttpContext context)
+		public static async Task Endpoint(HttpContext context)
 		{
 			int count;
 			int.TryParse((string?)context.Request.RouteValues["count"], out count);
