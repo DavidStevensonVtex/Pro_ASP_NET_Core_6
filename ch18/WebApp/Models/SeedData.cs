@@ -4,8 +4,8 @@
 	{
 		public static void SeedDatabase(DataContext context)
 		{
-			if (context.Products.Count() ==0 
-				&& context.Suppliers.Count() == 0 
+			if (context.Products.Count() == 0
+				&& context.Suppliers.Count() == 0
 				&& context.Categories.Count() == 0)
 			{
 				Supplier s1 = new Supplier { Name = "Splash Dudes", City = "San Jose" };
@@ -27,6 +27,8 @@
 					new Product { Name = "Human Chess Board", Price = 75, Category = c3, Supplier = s3 },
 					new Product { Name = "Bling-Bling King", Price = 1200, Category = c3, Supplier = s3 }
 				);
+
+				context.SaveChanges();
 			}
 		}
 	}

@@ -16,9 +16,12 @@ namespace WebApp
 
 			var app = builder.Build();
 
+			app.UseMiddleware<TestMiddleware>();
+
 			app.MapGet("/", () => "Hello World!");
 
 			var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
+			SeedData.SeedDatabase(context);
 
 			app.Run();
 		}
