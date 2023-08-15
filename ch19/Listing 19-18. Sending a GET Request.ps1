@@ -1,1 +1,1 @@
-Invoke-RestMethod http://localhost:5000/api/products/1000 # | Select-Object StatusCode
+Invoke-WebRequest http://localhost:5000/api/products/1000 | Select-Object StatusCode
