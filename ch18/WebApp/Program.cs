@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using WebApp.Models;
+
 namespace WebApp
 {
 	public class Program
@@ -6,23 +9,16 @@ namespace WebApp
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
-			builder.Services.AddRazorPages();
+			builder.Services.AddDbContext<DataContext>(opts =>
+			{
+				opts.UseSqlServer(builder.Configuration["ConnectionStrings:ProductConnection"]);
+			});
 
 			var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
-			if (!app.Environment.IsDevelopment())
-			{
-				app.UseExceptionHandler("/Error");
-			}
-			app.UseStaticFiles();
+			app.MapGet("/", () => "Hello World!");
 
-			app.UseRouting();
-
-			app.UseAuthorization();
-
-			app.MapRazorPages();
+			var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
 
 			app.Run();
 		}
