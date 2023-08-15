@@ -1,9 +1,13 @@
-﻿namespace WebApp.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace WebApp.Models
 {
 	public static class SeedData
 	{
 		public static void SeedDatabase(DataContext context)
 		{
+			context.Database.Migrate();
+
 			if (context.Products.Count() == 0
 				&& context.Suppliers.Count() == 0
 				&& context.Categories.Count() == 0)
