@@ -36,7 +36,7 @@ namespace WebApp.Controllers
 
 
 		[HttpPatch("{id}")]
-		public async Task<Supplier> PatchSupplier(long id, JsonPatchDocument<Supplier> patchDoc)
+		public async Task<Supplier?> PatchSupplier(long id, JsonPatchDocument<Supplier> patchDoc)
 		{
 			Supplier? s = await context.Suppliers.FindAsync(id);
 			if (s != null)
