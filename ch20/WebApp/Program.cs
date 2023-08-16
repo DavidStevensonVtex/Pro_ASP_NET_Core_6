@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
+//using System.Text.Json.Serialization;
 using WebApp.Models;
 
 namespace WebApp
@@ -17,14 +18,19 @@ namespace WebApp
 				opts.EnableSensitiveDataLogging(true);
 			});
 
-			builder.Services.AddControllers();
+			builder.Services.AddControllers().AddNewtonsoftJson();
 
-			builder.Services.Configure<JsonOptions>(opts =>
+			builder.Services.Configure<MvcNewtonsoftJsonOptions>(opts =>
 			{
-				// Doesn't seem to work. JsonSerializerOptions renamed to SerializerOptions.
-				// https://github.com/dotnet/docs/issues/27824
-				opts.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+				opts.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
 			});
+
+			//builder.Services.Configure<JsonOptions>(opts =>
+			//{
+			//	// Doesn't seem to work. JsonSerializerOptions renamed to SerializerOptions.
+			//	// https://github.com/dotnet/docs/issues/27824
+			//	opts.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+			//});
 
 			var app = builder.Build();
 
