@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-//using System.Text.Json.Serialization;
+using Microsoft.OpenApi.Models;
 using WebApp.Models;
 
 namespace WebApp
@@ -20,29 +19,33 @@ namespace WebApp
 
 			builder.Services.AddControllers().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
+			builder.Services.Configure<MvcNewtonsoftJsonOptions>(opts =>
+			{
+				opts.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+			});
+
 			builder.Services.Configure<MvcOptions>(opts =>
 			{
 				opts.RespectBrowserAcceptHeader = true;
 				opts.ReturnHttpNotAcceptable = true;
 			});
 
-			builder.Services.Configure<MvcNewtonsoftJsonOptions>(opts =>
+			builder.Services.AddSwaggerGen(c =>
 			{
-				opts.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApp", Version = "v1" });
 			});
-
-			//builder.Services.Configure<JsonOptions>(opts =>
-			//{
-			//	// Doesn't seem to work. JsonSerializerOptions renamed to SerializerOptions.
-			//	// https://github.com/dotnet/docs/issues/27824
-			//	opts.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-			//});
 
 			var app = builder.Build();
 
 			app.MapControllers();
 
 			app.MapGet("/", () => "Hello World!");
+
+			app.UseSwagger();
+			app.UseSwaggerUI(options =>
+			{
+				options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp");
+			});
 
 			var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
 			SeedData.SeedDatabase(context);
