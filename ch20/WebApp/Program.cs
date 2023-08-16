@@ -20,6 +20,12 @@ namespace WebApp
 
 			builder.Services.AddControllers().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
+			builder.Services.Configure<MvcOptions>(opts =>
+			{
+				opts.RespectBrowserAcceptHeader = true;
+				opts.ReturnHttpNotAcceptable = true;
+			});
+
 			builder.Services.Configure<MvcNewtonsoftJsonOptions>(opts =>
 			{
 				opts.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
