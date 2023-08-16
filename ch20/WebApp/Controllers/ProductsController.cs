@@ -21,6 +21,8 @@ namespace WebApp.Controllers
 		}
 
 		[HttpGet("{id}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetProduct(long id, [FromServices] ILogger<ProductsController> logger)
 		{
 			Product? p = await context.Products.FindAsync(id);
