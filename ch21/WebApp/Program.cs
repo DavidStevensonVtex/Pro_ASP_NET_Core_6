@@ -21,7 +21,7 @@ namespace WebApp
 
 			app.UseStaticFiles();
 			app.MapControllers();
-			app.MapControllerRoute("Default", "{controller}/{action=Index}/{id?}");
+			app.MapDefaultControllerRoute();
 
 			var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
 			SeedData.SeedDatabase(context);
