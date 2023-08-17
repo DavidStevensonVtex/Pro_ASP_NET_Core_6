@@ -15,7 +15,7 @@ namespace WebApp
 				opts.EnableSensitiveDataLogging(true);
 			});
 
-			builder.Services.AddControllersWithViews();
+			builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 			var app = builder.Build();
 
