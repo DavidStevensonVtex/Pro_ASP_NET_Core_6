@@ -23,6 +23,7 @@
 
   <PropertyGroup>
     <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
 </Project>
