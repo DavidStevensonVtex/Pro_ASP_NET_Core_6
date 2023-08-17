@@ -11,18 +11,20 @@
     <div class="m-2">
         <table class="table table-sm table-striped table-bordered" data-id="@Model?.ProductId">
             <tbody>
+                <tr><th>Name</th><td>
                 @switch ( Model?.Name )
                 {
                     case "Kayak":
-                        <tr><th>Name</th><td>Small Boat</td></tr>
+                        @: Small Boat
                         break;
                     case "Lifejacket":
-                        <tr><th>Nae</th><td>Flotation Aid</td></tr>
+                        @: Flotation Aid
                         break;
                     default:
-                        <tr><th>Name</th><td>@Model?.Name</td></tr>
+                        @Model?.Name
                         break;
                 }
+                </td></tr>
                 <tr><th>Price</th><td>@Model?.Price.ToString("C")</td></tr>
                 <tr><th>Tax</th><td>@Model?.Price * 0.2m</td></tr>
                 <tr><th>Tax</th><td>@(Model?.Price * 0.2m)</td></tr>
