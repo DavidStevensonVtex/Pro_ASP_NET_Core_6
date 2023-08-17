@@ -15,12 +15,13 @@ namespace WebApp
 				opts.EnableSensitiveDataLogging(true);
 			});
 
-			builder.Services.AddControllers();
+			builder.Services.AddControllersWithViews();
 
 			var app = builder.Build();
 
 			app.UseStaticFiles();
 			app.MapControllers();
+			app.MapControllerRoute("Default", "{controller}/{action=Index}/{id?}");
 
 			var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
 			SeedData.SeedDatabase(context);
