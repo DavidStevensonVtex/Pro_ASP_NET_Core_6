@@ -17,9 +17,16 @@ namespace WebApp
 
 			builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+			builder.Services.AddDistributedMemoryCache();
+			builder.Services.AddSession(options =>
+			{
+				options.Cookie.IsEssential = true;
+			});
+
 			var app = builder.Build();
 
 			app.UseStaticFiles();
+			app.UseSession();
 			app.MapControllers();
 			app.MapDefaultControllerRoute();
 
