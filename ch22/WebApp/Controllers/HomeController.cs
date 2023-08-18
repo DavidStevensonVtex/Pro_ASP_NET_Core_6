@@ -14,20 +14,7 @@ namespace WebApp.Controllers
 
 		public async Task<IActionResult> Index(long id = 1)
 		{
-			Product? prod = await context.Products.FindAsync(id);
-			if (prod?.CategoryId == 1)
-			{
-				return View("Watersports", prod);
-			}
-			else
-			{
-				return View(prod);
-			}
-		}
-
-		public IActionResult Common()
-		{
-			return View();
+			return View(await context.Products.FindAsync(id));
 		}
 
 		public IActionResult List()
