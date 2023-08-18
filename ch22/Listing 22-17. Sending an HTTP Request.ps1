@@ -1,0 +1,1 @@
+Invoke-WebRequest http://localhost:5000/home/list | Select-Object -expand Content
