@@ -18,6 +18,10 @@ namespace WebApp.Pages
         public async Task<IActionResult> OnGetAsync(long id = 1)
         {
             Product = await context.Products.FindAsync(id);
+            if (Product == null)
+            {
+                return RedirectToPage("NotFound");
+            }
             return Page();
         }
     }
