@@ -2,3 +2,4 @@
 @model IndexModel
 
 <div class="bg-primary text-white text-center m-2 p-2">@Model.Product?.Name</div>
+<partial name="_ProductPartial" model="Model.Product" />
