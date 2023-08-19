@@ -16,6 +16,7 @@ namespace WebApp
 			});
 
 			builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+			builder.Services.AddRazorPages();
 
 			builder.Services.AddDistributedMemoryCache();
 			builder.Services.AddSession(options =>
@@ -29,6 +30,7 @@ namespace WebApp
 			app.UseSession();
 			app.MapControllers();
 			app.MapDefaultControllerRoute();
+			app.MapRazorPages();
 
 			var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
 			SeedData.SeedDatabase(context);
