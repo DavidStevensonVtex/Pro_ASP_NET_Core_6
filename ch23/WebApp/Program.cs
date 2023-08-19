@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using NuGet.Packaging;
 
 namespace WebApp
 {
@@ -22,6 +24,11 @@ namespace WebApp
 			builder.Services.AddSession(options =>
 			{
 				options.Cookie.IsEssential = true;
+			});
+
+			builder.Services.Configure<RazorPagesOptions>(opts =>
+			{
+				opts.Conventions.AddPageRoute("/Index", "/extra/page/{id:long?}");
 			});
 
 			var app = builder.Build();
