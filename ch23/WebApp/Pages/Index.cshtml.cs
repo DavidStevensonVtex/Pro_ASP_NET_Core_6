@@ -1,20 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebApp.Models;
 
 namespace WebApp.Pages
 {
 	public class IndexModel : PageModel
 	{
-		private readonly ILogger<IndexModel> _logger;
+        private DataContext context;
 
-		public IndexModel(ILogger<IndexModel> logger)
-		{
-			_logger = logger;
-		}
+        public Product? Product { get; set; }
 
-		public void OnGet()
-		{
+        public IndexModel(DataContext ctx)
+        {
+            context = ctx;
+        }
 
-		}
-	}
+        public async Task OnGetAsync(long id = 1)
+        {
+            Product = await context.Products.FindAsync(id);
+        }
+    }
 }
