@@ -3,7 +3,7 @@
 namespace WebApp.TagHelpers
 {
     [HtmlTargetElement("tr", Attributes = "theme")]
-    public class RowTagHelper : TagHelper
+    public class CoordinatingTagHelpers : TagHelper
     {
         public string Theme { get; set; }
 
@@ -11,17 +11,17 @@ namespace WebApp.TagHelpers
         {
             context.Items["theme"] = Theme;
         }
+    }
 
-        [HtmlTargetElement("th")]
-        [HtmlTargetElement("td")]
-        public class CellTagHelper : TagHelper
+    [HtmlTargetElement("th")]
+    [HtmlTargetElement("td")]
+    public class CellTagHelper : TagHelper
+    {
+        public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            public override void Process(TagHelperContext context, TagHelperOutput output)
-            {            
-                if (context.Items.ContainsKey("theme"))
-                {
-                    output.Attributes.SetAttribute("class", $"bg-{context.Items["theme"]} text-white");
-                }
+            if (context.Items.ContainsKey("theme"))
+            {
+                output.Attributes.SetAttribute("class", $"bg-{context.Items["theme"]} text-white");
             }
         }
     }
