@@ -1,11 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using NuGet.Packaging;
 
 namespace WebApp
 {
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{
