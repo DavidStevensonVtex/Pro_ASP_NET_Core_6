@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
+using Microsoft.AspNetCore.Razor.TagHelpers;
+using WebApp.TagHelpers;
 
 namespace WebApp
 {
@@ -18,6 +20,7 @@ namespace WebApp
 			builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			builder.Services.AddRazorPages();
 			builder.Services.AddSingleton<CitiesData>();
+			builder.Services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
 
 			var app = builder.Build();
 
