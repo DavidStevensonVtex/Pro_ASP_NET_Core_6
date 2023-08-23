@@ -17,15 +17,15 @@ namespace WebApp.TagHelpers
         {
             if (output.TagName == "table")
             {
-                TagBuilder cell = new TagBuilder("td");
-                cell.Attributes.Add("colspan", "2");
-                cell.Attributes.Add("class", "bg-dark text-white text-center");
-                cell.InnerHtml.Append("Table Footer");
-                TagBuilder row = new TagBuilder("tr");
-                row.InnerHtml.AppendHtml(cell);
-                TagBuilder footer = new TagBuilder("tfoot");
-                footer.InnerHtml.AppendHtml(row);
-                output.PostContent.AppendHtml(footer);
+                //TagBuilder cell = new TagBuilder("td");
+                //cell.Attributes.Add("colspan", "2");
+                //cell.Attributes.Add("class", "bg-dark text-white text-center");
+                //cell.InnerHtml.Append("Table Footer");
+                //TagBuilder row = new TagBuilder("tr");
+                //row.InnerHtml.AppendHtml(cell);
+                //TagBuilder footer = new TagBuilder("tfoot");
+                //footer.InnerHtml.AppendHtml(row);
+                //output.PostContent.AppendHtml(footer);
 
                 XElement tfoot = new XElement("tfoot",
                     new XElement("tr",
@@ -33,8 +33,7 @@ namespace WebApp.TagHelpers
                             new XAttribute("colspan", "2"),
                             new XAttribute("class", "bg-dark text-white text-center"),
                             "Table Footer")));
-                string tfootString = tfoot.ToString();
-                //output.PostContent.Append(tfoot.ToString());
+                output.PostContent.AppendHtml(tfoot.ToString());
             }
         }
     }
