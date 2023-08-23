@@ -1,0 +1,1 @@
+libman install jQuery@3.6.0 -d wwwroot/lib/jquery
