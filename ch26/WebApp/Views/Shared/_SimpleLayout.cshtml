@@ -2,9 +2,11 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link   asp-href-include="~/lib/bootstrap/css/*.min.css"
-            asp-href-exclude="**/*-reboot.min.css,**/*-grid*,**/*-utilities*, **/*.rtl.min.css"
+    <link   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
+            asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+            asp-fallback-test-class="btn"
+            asp-fallback-test-property="display"
+            asp-fallback-test-value="inline-block"
             rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             asp-fallback-src="/lib/jquery/dist/jquery.min.js"
