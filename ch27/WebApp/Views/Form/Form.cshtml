@@ -17,10 +17,14 @@
         <input class="form-control" asp-for="Price" />
     </div>
     <div class="form-group">
-        <label asp-for="Category.Name">Category</label>
         @{ #pragma warning disable C58602 }
-        <input class="form-control" asp-for="Category.Name" />
+        <label asp-for="Category.Name">Category</label>
         @{ #pragma warning restore C58602 }
+        <select class="form-control" asp-for="CategoryId">
+            <option value="1">Watersports</option>
+            <option value="2">Soccer</option>
+            <option value="3">Chess</option>
+        </select>
     </div>
     <div class="form-group">
         <label asp-for="Supplier.Name">Supplier</label>
