@@ -6,7 +6,7 @@
 <form asp-action="submitform" method="post" id="htmlform">
     <div class="form-group">
         <label>Name</label>
-        <input class="form-control" name="Name" value="@Model?.Name" />
+        <input class="form-control" asp-for="Name" />
     </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
 </form>
