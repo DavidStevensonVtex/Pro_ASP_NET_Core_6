@@ -16,11 +16,15 @@
         </div>
         <div class="form-group">
             <label>Category</label>
+            @{ #pragma warning disable C58602 }
             <input class="form-control" asp-for="Product.Category.Name" />
+            @{ #pragma warning restore C58602 }
         </div>
         <div class="form-group">
             <label>Supplier</label>
+             @{ #pragma warning disable C58602 }
             <input class="form-control" asp-for="Product.Supplier.Name" />
+            @{ #pragma warning restore C58602 }
         </div>
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
