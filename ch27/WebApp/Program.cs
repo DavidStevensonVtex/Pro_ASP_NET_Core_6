@@ -20,14 +20,13 @@ namespace WebApp
 			builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			builder.Services.AddRazorPages();
 			builder.Services.AddSingleton<CitiesData>();
-            //builder.Services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
-            //builder.Services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
 
             var app = builder.Build();
 
 			app.UseStaticFiles();
-			app.MapControllers();
-			app.MapDefaultControllerRoute();
+			//app.MapControllers();
+			//app.MapDefaultControllerRoute();
+			app.MapControllerRoute("forms", "controllers/{controller=Home}/{action=Index}/{id?}");
 			app.MapRazorPages();
 
 			var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
