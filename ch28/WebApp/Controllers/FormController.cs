@@ -15,14 +15,14 @@ namespace WebApp.Controllers
             context = ctx;
         }
 
-        public async Task<IActionResult> Index(long id)
+        public async Task<IActionResult> Index(long? id)
         {
             ViewBag.Categories = new SelectList(context.Categories, "CategoryId", "Name");
 
             return View("Form", await context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Supplier)
-                .FirstOrDefaultAsync(p => p.ProductId == id));
+                .FirstOrDefaultAsync(p =>  id == null || p.ProductId == id));
         }
 
         [HttpPost]
