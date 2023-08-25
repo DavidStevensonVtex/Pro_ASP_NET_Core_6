@@ -27,7 +27,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitForm(Category category)
+        public IActionResult SubmitForm([Bind(Prefix="Category")] Category category)
         {
             TempData["category"] = System.Text.Json.JsonSerializer.Serialize(category);
             return RedirectToAction(nameof(Results));
