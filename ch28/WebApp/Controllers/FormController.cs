@@ -22,7 +22,7 @@ namespace WebApp.Controllers
             return View("Form", await context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Supplier)
-                .FirstAsync(p => p.ProductId == id));
+                .FirstOrDefaultAsync(p => p.ProductId == id));
         }
 
         [HttpPost]
