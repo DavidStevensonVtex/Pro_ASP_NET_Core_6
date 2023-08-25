@@ -43,10 +43,9 @@
                 .FirstAsync(p => p.ProductId == id);
         }
 
-        public IActionResult OnPost(string name, decimal price)
+        public IActionResult OnPost(Product product)
         {
-            TempData["name param"] = name;
-            TempData["price param"] = price.ToString();
+            TempData["product"] = System.Text.Json.JsonSerializer.Serialize(product);
             return RedirectToPage("FormResults");
         }
     }
