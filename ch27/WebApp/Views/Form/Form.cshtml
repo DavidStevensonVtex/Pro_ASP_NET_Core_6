@@ -26,7 +26,7 @@
     <div class="form-group">
         <label asp-for="Supplier.Name">Supplier</label>
         @{ #pragma warning disable C58602 }
-        <input class="form-control" asp-for="Supplier.Name" />
+        <textarea class="form-control" asp-for="Supplier.Name"></textarea>
         @{ #pragma warning restore C58602 }
     </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
