@@ -16,5 +16,11 @@
         <label asp-for="Price"></label>
         <input class="form-control" asp-for="Price" />
     </div>
+    <div class="form-group">
+        <label>Category Name</label>
+        @{ #pragma warning disable CS8602 }
+        <input class="form-control" name="Category.Name" value="@Model.Category.Name" />
+        @{ #pragma warning restore CS8602 }
+    </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
 </form>
