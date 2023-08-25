@@ -27,7 +27,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult SubmitForm()
         {
-            foreach (string key in Request.Form.Keys.Where(k => !k.StartsWith("_")))
+            foreach (string key in Request.Form.Keys)
             {
                 TempData[key] = string.Join(", ", Request.Form[key]);
             }
