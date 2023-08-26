@@ -38,6 +38,6 @@
     public class BindingsModel : PageModel
     {
         [BindProperty(Name = "Data")]
-        public string[] Data { get; set; } = Array.Empty<string>();
+        public SortedSet<string> Data { get; set; } = new SortedSet<string>();
     }
 }
