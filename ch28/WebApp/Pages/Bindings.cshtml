@@ -5,17 +5,18 @@
     <div class="row">
         <div class="col">
             <form asp-page-"Bindings" method="post">
-                @for ( int i = 0; i < 2; i++ )
-                {
-                    <div class="form-group">
-                        <label>Name #@i</label>
-                        <input class="form-control" name="Data[@i].Name" value="Product-@i" />
-                    </div>
-                    <div class="form-group">
-                        <label>Price #@i</label>
-                        <input class="form-control" name="Data[@i].Price" value="@(100+i)" />
-                    </div>
-                }
+                <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" asp-for="Data.Name" />
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                    <input class="form-control" asp-for="Data.Price" value="@(Model.Data.Price + 1)"/>
+                </div>
+                <div class="form-check m-2">
+                    <input class="form-check-input" type="checkbox" name="bind" value="true" checked />
+                    <label class="form-check-label">Model Bind?</label>
+                </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a class="btn btn-secondary" asp-page="Bindings">Reset</a>
@@ -25,10 +26,7 @@
             <table class="table table-sm table-striped">
                 <tbody>
                     <tr><th>Name</th><th>Price</th></tr>
-                    @foreach ( Product p in Model.Data )
-                    {
-                        <tr><td>@p.Name</td><td>@p.Price</td></tr>
-                    }
+                    <tr><td>@Model.Data.Name</td><td>@Model.Data.Price</td></tr>
                 </tbody>
             </table>
         </div>
@@ -38,8 +36,14 @@
 @functions {
     public class BindingsModel : PageModel
     {
-        // [BindProperty(Name = "Data")]
-        [FromQuery(Name ="Data")]
-        public Product[] Data { get; set; } = Array.Empty<Product>();
+        public Product Data { get; set; } = new Product() { Name = "Skis", Price = 500 };
+
+        public async Task OnPostAsync([FromForm] bool bind)
+        {
+            if (bind)
+            {
+                await TryUpdateModelAsync<Product>(Data, "data", p => p.Name, p => p.Price);
+            }
+        }
     }
 }
