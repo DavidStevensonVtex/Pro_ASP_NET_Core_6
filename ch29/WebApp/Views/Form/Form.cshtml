@@ -8,23 +8,27 @@
 <form asp-action="submitform" method="post" id="htmlform">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
-        <labelasp-for ="ProductId">ProductId</labelasp-for>
+        <label asp-for ="ProductId">ProductId</label>
         <input class="form-control" asp-for="ProductId" />
     </div>
     <div class="form-group">
         <label asp-for"Name">Name</label>
+        <div><span asp-validation-for="Name" class="text-danger"></span></div>
         <input class="form-control" asp-for="Name" />
     </div>
     <div class="form-group">
         <label asp-for="Price"></label>
+        <div><span asp-validation-for="Price" class="text-danger"></span></div>
         <input class="form-control" asp-for="Price" />
     </div>
     <div class="form-group">
         <label asp-for="CategoryId"></label>
+        <div><span asp-validation-for="CategoryId" class="text-danger"></span></div>
         <input class="form-control" asp-for="CategoryId" />
     </div>
     <div class="form-group">
         <label asp-for="SupplierId"></label>
+        <div><span asp-validation-for="SupplierId" class="text-danger"></span></div>
         <input class="form-control" asp-for="SupplierId" />
     </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
