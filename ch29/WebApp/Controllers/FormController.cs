@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
-using System.Text;
 
 namespace WebApp.Controllers
 {
@@ -27,6 +27,23 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult SubmitForm(Product product)
         {
+            if (ModelState.GetValidationState(nameof(Product.Price)) == ModelValidationState.Valid && product.Price <= 0)
+            {
+                ModelState.AddModelError(nameof(Product.Price), "Enter a positive price");
+            }
+
+            if (ModelState.GetValidationState(nameof(Product.CategoryId)) == ModelValidationState.Valid && 
+                !context.Categories.Any(c => c.CategoryId == product.CategoryId)) 
+            {
+                ModelState.AddModelError(nameof(Product.CategoryId), "Enter an existing category ID");
+            }
+
+            if (ModelState.GetValidationState(nameof(Product.SupplierId)) == ModelValidationState.Valid &&
+                !context.Suppliers.Any(s => s.SupplierId == product.SupplierId))
+            {
+                ModelState.AddModelError(nameof(Product.SupplierId), "Enter an existing supplier ID");
+            }
+
             if (ModelState.IsValid)
             {
                 TempData["name"] = product.Name;
