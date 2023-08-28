@@ -8,9 +8,12 @@ namespace WebApp.Models
 	public class Product
 	{
 		public long ProductId { get; set; }
+
+		[Required(ErrorMessage = "Please enter a value")]
 		public string Name { get; set; }
+
+		[Range(1,999999, ErrorMessage = "Please enter a positive price")]
 		[Column(TypeName = "decimal(8, 2)")]
-		//[BindNever]
 		public decimal Price { get; set; }
 		public long CategoryId { get; set; }
 		public Category? Category { get; set; }
