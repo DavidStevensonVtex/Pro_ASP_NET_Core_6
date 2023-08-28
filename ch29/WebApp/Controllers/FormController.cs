@@ -11,7 +11,7 @@ namespace WebApp.Controllers
     {
         private DataContext context;
 
-        public FormController ( DataContext ctx )
+        public FormController(DataContext ctx)
         {
             context = ctx;
         }
@@ -21,9 +21,7 @@ namespace WebApp.Controllers
             ViewBag.Categories = new SelectList(context.Categories, "CategoryId", "Name");
 
             return View("Form", await context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Supplier)
-                .FirstOrDefaultAsync(p =>  id == null || p.ProductId == id));
+                .FirstOrDefaultAsync(p => id == null || p.ProductId == id));
         }
 
         [HttpPost]
@@ -31,25 +29,14 @@ namespace WebApp.Controllers
         {
             TempData["name"] = product.Name;
             TempData["price"] = product.Price.ToString();
-            TempData["category name"] = product.Category?.Name;
+            TempData["categoryId"] = product.CategoryId;
+            TempData["supplierId"] = product.SupplierId;
             return RedirectToAction(nameof(Results));
         }
 
         public IActionResult Results()
         {
             return View();
-        }
-
-        public string Header([FromHeader(Name = "Accept-Language")] string accept)
-        {
-            return $"Header: {accept}";
-        }
-
-        [HttpPost]
-        [IgnoreAntiforgeryToken]
-        public Product Body([FromBody] Product model)
-        {
-            return model;
         }
     }
 }
