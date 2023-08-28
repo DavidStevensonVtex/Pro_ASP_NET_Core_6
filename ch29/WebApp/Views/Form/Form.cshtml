@@ -17,12 +17,12 @@
         <input class="form-control" asp-for="Price" />
     </div>
     <div class="form-group">
-        <input type="hidden" asp-for="CategoryId" />
-        <input type="hidden" asp-for="Category.CategoryId" />
-        <label>Category Name</label>
-        @{ #pragma warning disable CS8602 }
-        <input class="form-control" asp-for="Category.Name" />
-        @{ #pragma warning restore CS8602 }
+        <label asp-for="CategoryId"></label>
+        <input class="form-control" asp-for="CategoryId" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SupplierId"></label>
+        <input class="form-control" asp-for="SupplierId" />
     </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
 </form>
