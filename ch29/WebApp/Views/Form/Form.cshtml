@@ -6,7 +6,7 @@
 <partial name="_Validation" />
 
 <form asp-action="submitform" method="post" id="htmlform">
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label asp-for ="ProductId">ProductId</label>
         <input class="form-control" asp-for="ProductId" />
