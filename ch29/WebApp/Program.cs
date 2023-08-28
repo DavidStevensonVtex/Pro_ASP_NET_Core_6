@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
 using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp
 {
@@ -24,6 +25,9 @@ namespace WebApp
 			{
 				opts.HeaderName = "X-XSRF-TOKEN";
 			});
+
+			builder.Services.Configure<MvcOptions>(opts => opts.ModelBindingMessageProvider
+				.SetValueMustNotBeNullAccessor(value => "Please enter a value"));
 
             var app = builder.Build();
 
