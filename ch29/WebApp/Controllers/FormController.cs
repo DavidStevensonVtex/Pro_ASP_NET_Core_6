@@ -34,10 +34,10 @@ namespace WebApp.Controllers
                 ModelState.AddModelError("", "Small products cannot cost more than $100");
             }
 
-            if (ModelState.GetValidationState(nameof(Product.Price)) == ModelValidationState.Valid && product.Price <= 0)
-            {
-                ModelState.AddModelError(nameof(Product.Price), "Enter a positive price");
-            }
+            //if (ModelState.GetValidationState(nameof(Product.Price)) == ModelValidationState.Valid && product.Price <= 0)
+            //{
+            //    ModelState.AddModelError(nameof(Product.Price), "Enter a positive price");
+            //}
 
             if (ModelState.GetValidationState(nameof(Product.CategoryId)) == ModelValidationState.Valid && 
                 !context.Categories.Any(c => c.CategoryId == product.CategoryId)) 
