@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using WebApp.Validation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Completion;
 
 namespace WebApp.Models
 {
@@ -19,10 +21,12 @@ namespace WebApp.Models
 		public decimal Price { get; set; }
 
         [PrimaryKey(ContextTypes = typeof(DataContext), DataType = typeof(Category))]
+		[Remote("CategoryKey", "Validation", ErrorMessage = "Enter an existing key")]
         public long CategoryId { get; set; }
 		public Category? Category { get; set; }
 
         [PrimaryKey(ContextTypes = typeof(DataContext), DataType = typeof(Supplier))]
+        [Remote("SupplierKey", "Validation", ErrorMessage = "Enter an existing key")]
         public long SupplierId { get; set; }
 
 		[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
