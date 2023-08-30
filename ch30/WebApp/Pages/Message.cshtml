@@ -1,4 +1,5 @@
 ﻿@page "/pages/message"
+@using Microsoft.AspNetCore.Http
 @model MessageModel
 
 
@@ -24,5 +25,17 @@ else if (Model is IDictionary<string, string>)
     public class MessageModel : PageModel
     {
         public object Message { get; set; } = "This is the Message Razor Page";
+
+        public IActionResult OnGet()
+        {
+            if (!Request.IsHttps)
+            {
+                return new StatusCodeResult(StatusCodes.Status403Forbidden);
+            }
+            else
+            {
+                return Page();
+            }
+        }
     }
 }
