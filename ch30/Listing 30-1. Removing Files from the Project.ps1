@@ -1,0 +1,1 @@
+Remove-Item -Path Controllers,Views,Pages -Recurse -Exclude _*,Shared
