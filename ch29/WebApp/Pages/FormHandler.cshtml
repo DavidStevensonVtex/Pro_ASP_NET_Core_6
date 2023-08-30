@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Mvc.ModelBinding;
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using Microsoft.EntityFrameworkCore
+@using WebApp.Validation
 
 <partial name="_Validation" />
 
@@ -35,7 +36,6 @@
 </div>
 
 @functions {
-    // [IgnoreAntiforgeryToken]
     public class FormHandlerModel : PageModel
     {
         private DataContext context;
@@ -46,10 +46,7 @@
         }
 
         [BindProperty]
-        public Product? Product { get; set; } = new();
-
-        // [BindProperty(Name = "Product.Category")]
-        // public Category Category { get; set; } = new();
+        public Product Product { get; set; } = new();
 
         public async Task OnGetAsync(long id = 1)
         {
@@ -61,29 +58,6 @@
 
         public IActionResult OnPost()
         {
-            if (ModelState.GetValidationState("Product.Price") == ModelValidationState.Valid && Product.Price <= 0)
-            {
-                ModelState.AddModelError("Product.Price", "Enter a positive price");
-            }
-
-            if (ModelState.GetValidationState("Product.Name") == ModelValidationState.Valid &&
-               ModelState.GetValidationState("Product.Price") == ModelValidationState.Valid &&
-               Product.Name.ToLower().StartsWith("small") && Product.Price > 100)
-            {
-                ModelState.AddModelError("", "Small products cannot cost more than $100");
-            }
-
-            if (ModelState.GetValidationState("Product.CategoryId") == ModelValidationState.Valid &&
-                !context.Categories.Any(c => c.CategoryId == Product.CategoryId))
-            {
-                ModelState.AddModelError("Product.CategoryId", "Enter an existing category ID");
-            }
-
-            if (ModelState.GetValidationState("Product.SupplierId") == ModelValidationState.Valid &&
-                !context.Suppliers.Any(s => s.SupplierId == Product.SupplierId))
-            {
-                ModelState.AddModelError("Product.SupplierId", "Enter an existing supplier ID");
-            }
 
             if (ModelState.IsValid)
             {
@@ -91,10 +65,11 @@
                 TempData["price"] = Product.Price.ToString();
                 TempData["categoryId"] = Product.CategoryId.ToString();
                 TempData["supplierId"] = Product.SupplierId.ToString();
-                return RedirectToAction("FormResults");
+                return RedirectToPage("FormResults");
             }
             else
             {
+                ModelState.PromotePropertyErrors(nameof(Product));
                 return Page();
             }
         }
