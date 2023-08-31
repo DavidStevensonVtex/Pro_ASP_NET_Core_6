@@ -4,10 +4,10 @@ using WebApp.Filters;
 
 namespace WebApp.Controllers
 {
-    [HttpsOnly]
+    //[HttpsOnly]
     [ResultDiagnostics]
-    [GuidResponse]
-    [GuidResponse]
+    //[GuidResponse]
+    //[GuidResponse]
     public class HomeController : Controller
     {
         public IActionResult Index()
