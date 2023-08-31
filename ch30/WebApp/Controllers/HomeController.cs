@@ -19,7 +19,7 @@ namespace WebApp.Controllers
         }
 
         //[ChangeArg]
-        public IActionResult Messages(string message1, string message2 = "None" )
+        public IActionResult Messages(string message1, string message2 = "None")
         {
             return View("Message", $"{message1}, {message2}");
         }
@@ -29,6 +29,23 @@ namespace WebApp.Controllers
             if (context.ActionArguments.ContainsKey("message1"))
             {
                 context.ActionArguments["message1"] = "New message";
+            }
+        }
+
+        [RangeException]
+        public ViewResult GenerateException(int? id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            else if (id > 10)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id));
+            }
+            else
+            {
+                return View("Message", $"The value is{id}");
             }
         }
     }
