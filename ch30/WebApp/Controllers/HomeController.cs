@@ -15,5 +15,11 @@ namespace WebApp.Controllers
         {
             return View("Message", "This is the Secure action on the Home controller");
         }
+
+        [ChangeArg]
+        public IActionResult Messages(string message1, string message2 = "None" )
+        {
+            return View("Message", $"{message1}, {message2}");
+        }
     }
 }
