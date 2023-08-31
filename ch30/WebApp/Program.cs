@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using WebApp.Filters;
 using WebApp.Models;
-using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp
 {
@@ -19,6 +18,8 @@ namespace WebApp
 
 			builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			builder.Services.AddRazorPages();
+
+			builder.Services.AddScoped<GuidResponseAttribute>();
 
             var app = builder.Build();
 
