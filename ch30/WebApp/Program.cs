@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Filters;
 using WebApp.Models;
@@ -20,6 +21,7 @@ namespace WebApp
 			builder.Services.AddRazorPages();
 
 			builder.Services.AddScoped<GuidResponseAttribute>();
+			builder.Services.Configure<MvcOptions>(opts => opts.Filters.Add<HttpsOnlyAttribute>());
 
             var app = builder.Build();
 
