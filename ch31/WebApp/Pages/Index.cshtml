@@ -20,9 +20,9 @@
                     <td>@p.Price</td>
                     <td>@p.Category?.Name</td>
                     <td class="text-center">
-                        <a asp-action="Details" asp-route-id="@p.ProductId" class="btn btn-sm btn-info">Details</a>
-                        <a asp-action="Edit" asp-route-id="@p.ProductId" class="btn btn-sm btn-warning">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@p.ProductId" class="btn btn-sm btn-danger">Delete</a>
+                        <a asp-page="Details" asp-route-id="@p.ProductId" class="btn btn-sm btn-info">Details</a>
+                        <a asp-page="Edit" asp-route-id="@p.ProductId" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-page="Delete" asp-route-id="@p.ProductId" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             }
