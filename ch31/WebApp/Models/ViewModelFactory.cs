@@ -22,5 +22,20 @@
         {
             return new ProductViewModel { Product = product, Categories = categories, Suppliers = suppliers };
         }
+
+        public static ProductViewModel Edit(
+            Product product, 
+            IEnumerable<Category> categories, 
+            IEnumerable<Supplier> suppliers)
+        {
+            return new ProductViewModel
+            {
+                Product = product,
+                Categories = categories,
+                Suppliers = suppliers,
+                Theme = "warning",
+                Action = "Edit"
+            };
+        }
     }
 }
