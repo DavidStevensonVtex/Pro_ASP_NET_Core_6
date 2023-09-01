@@ -15,5 +15,17 @@ namespace WebApp.Pages
         public IEnumerable<Supplier> Suppliers => DataContext.Suppliers;
 
         public ProductViewModel? ViewModel { get; set; }
+
+        protected async Task CheckNewCategory(Product product)
+        {
+            if (product.CategoryId == -1 && !string.IsNullOrEmpty(product.Category?.Name))
+            {
+                DataContext.Categories.Add(product.Category);
+                await DataContext.SaveChangesAsync();
+                product.CategoryId = product.Category.CategoryId;
+                ModelState.Clear();
+                TryValidateModel(product);
+            }
+        }
     }
 }
