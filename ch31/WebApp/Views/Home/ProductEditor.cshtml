@@ -41,7 +41,7 @@
             <span asp-validation-for="Product.SupplierId" class="text-danger"></span>
         </div>
         <select asp-for="Product.SupplierId" class="form-control" disabled="@Model.ReadOnly"
-                asp-items="@(new SelectList(Model?.Suppliers, "CategoryId", "Name"))">
+                asp-items="@(new SelectList(Model?.Suppliers, "SupplierId", "Name"))">
             <option value="" disabled selected>Choose a Supplier</option>
         </select>
     </div>
