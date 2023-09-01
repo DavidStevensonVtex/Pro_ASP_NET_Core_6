@@ -37,5 +37,21 @@
                 Action = "Edit"
             };
         }
+
+        public static ProductViewModel Delete(
+            Product product,
+            IEnumerable<Category> categories,
+            IEnumerable<Supplier> suppliers)
+        {
+            return new ProductViewModel
+            {
+                Product = product,
+                Action = "Delete",
+                ReadOnly = true,
+                Theme = "danger",
+                Categories = categories,
+                Suppliers = suppliers
+            };
+        }
     }
 }
