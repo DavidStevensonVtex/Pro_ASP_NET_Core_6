@@ -4,7 +4,7 @@
 
 <h5 class="bg-@Model?.Theme text-white text-center p-2">@Model?.Action</h5>
 
-<form asp-action="@Model?.Action" method="post">
+<form asp-page="@Model?.Action" method="post">
     <div class="form-group">
         <label asp-for="Product.ProductId"></label>
         <input class="form-control" asp-for="Product.ProductId" readonly />
