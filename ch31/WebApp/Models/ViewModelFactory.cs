@@ -16,5 +16,11 @@
                     new List<Supplier> { p.Supplier },
             };
         }
+
+        public static ProductViewModel Create(Product product,
+            IEnumerable<Category> categories, IEnumerable<Supplier> suppliers)
+        {
+            return new ProductViewModel { Product = product, Categories = categories, Suppliers = suppliers };
+        }
     }
 }
