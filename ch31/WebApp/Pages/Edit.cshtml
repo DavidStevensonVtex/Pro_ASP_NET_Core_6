@@ -12,8 +12,10 @@
 
         public async Task OnGetAsync(long id)
         {
-            Product p = await this.DataContext.Products.FindAsync(id) ?? new Product();
-            ViewModel = ViewModelFactory.Edit(p, Categories, Suppliers);
+            Product p = TempData.ContainsKey("product") ?
+                JsonSerializer.Deserialize<Product>((TempData["product"] as string)!)! :
+                await this.DataContext.Products.FindAsync(id);
+            ViewModel = ViewModelFactory.Edit(p ?? new Product(), Categories, Suppliers);
         }
 
         public async Task<IActionResult> OnPostAsync([FromForm] Product product)
