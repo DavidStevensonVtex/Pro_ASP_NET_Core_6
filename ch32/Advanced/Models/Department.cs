@@ -4,6 +4,6 @@
     {
         public long Departmentid { get; set; }
         public string Name { get; set; } = String.Empty;
-        public IEnumerable<Person>? People { get; ; set; }
+        public IEnumerable<Person>? People { get; set; }
     }
 }
