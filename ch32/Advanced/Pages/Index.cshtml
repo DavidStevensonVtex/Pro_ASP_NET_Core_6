@@ -25,13 +25,14 @@
 <form asp-page="Index" method="get">
     <div class="form-group">
         <div class="form-group">
-            <label for="selectedCity" class="form-control">
+            <label for="selectedCity" class="form-control" />
+            <select name="selectedCity" class="form-control">
                 <option disabled selected>Select City</option>
-                @foreach ( string city in Model.Cities)
+                @foreach (string city in Model.Cities)
                 {
                     <option selected="@(city == Model.SelectedCity)"> @city </option>
                 }
-            </label>
+            </select>
         </div>
     </div>
     <button class="btn btn-primary mt-2" type="submit">Select</button>
