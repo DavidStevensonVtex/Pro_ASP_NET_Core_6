@@ -1,3 +1,6 @@
+using Advanced.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Advanced
 {
     public class Program
@@ -6,23 +9,18 @@ namespace Advanced
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<DataContext>(opts =>
+            {
+                opts.UseSqlServer(builder.Configuration["ConnectionStrings:PeopleConnection"]);
+                opts.EnableSensitiveDataLogging(true);
+            });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-            }
-            app.UseStaticFiles();
+            app.MapGet("/", () => "Hello World !");
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapRazorPages();
+            var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
+            SeedData.SeedDatabase(context);
 
             app.Run();
         }
