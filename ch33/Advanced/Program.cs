@@ -11,6 +11,7 @@ namespace Advanced
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+            builder.Services.AddServerSideBlazor();
 
             builder.Services.AddDbContext<DataContext>(opts =>
             {
@@ -27,6 +28,7 @@ namespace Advanced
             app.MapControllers();
             app.MapControllerRoute("controllers", "controllers/{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+            app.MapBlazorHub();
 
             var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
             SeedData.SeedDatabase(context);
