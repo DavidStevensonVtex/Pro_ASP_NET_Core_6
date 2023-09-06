@@ -1,6 +1,6 @@
 ﻿<div class="form-group">
     <label>City:</label>
-    <input class="form-control" value="@City" @onchange="UpdateCity" />
+    <input class="form-control" @bind="City" />
 </div>
 
 <div class="p-2 mb-2">City Value: @City</div>
@@ -10,8 +10,8 @@
 @code {
     public string? City { get; set; } = "London";
 
-    public void UpdateCity ( ChangeEventArgs e)
-    {
-        City = e.Value as string;
-    }
+    // public void UpdateCity ( ChangeEventArgs e)
+    // {
+    //     City = e.Value as string;
+    // }
 }
