@@ -1,22 +1,5 @@
 ﻿@page "/pages/blazor"
 
-<script type="text/javascript">
-    console.log("Javascript running");
-    window.addEventListener("DOMContentLoaded", () => {
-        console.log("DOM loaded");
-        document.getElementById("markElems").addEventListener("click", () => {
-            console.log("Mark Elements button clicked");
-            document.querySelectorAll("td:first-child")
-                .forEach(elem => {
-                    elem.innerText = `M:${elem.innerText}`;
-                    elem.classList.add("boder", "border-dark");
-                });
-        });
-    });
-</script>
-
 <h4 class="bg-primary text-white text-center p-2">Blazor People</h4>
 
-<button id="markElems" class="btn btn-outline-primary mb-2">Mark Elements</button>
-
-<component type="typeof(Advanced.Blazor.PeopleList)" render-mode="Server" />
+<component type="typeof(Advanced.Blazor.Events)" render-mode="Server" />
