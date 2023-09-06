@@ -1,6 +1,6 @@
 ﻿<div class="form-group">
     <label>City:</label>
-    <input class="form-control" @bind="City" />
+    <input class="form-control" @bind-value="City" @bind-value:event="oninput" />
 </div>
 
 <div class="p-2 mb-2">City Value: @City</div>
@@ -9,9 +9,4 @@
 
 @code {
     public string? City { get; set; } = "London";
-
-    // public void UpdateCity ( ChangeEventArgs e)
-    // {
-    //     City = e.Value as string;
-    // }
 }
