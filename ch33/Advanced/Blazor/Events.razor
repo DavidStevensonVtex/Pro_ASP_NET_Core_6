@@ -5,6 +5,9 @@
         <button class="btn btn-primary" @onclick="@(e => IncrementCounter(local))">
             Increment Counter #@(i + 1)
         </button>
+        <button class="btn btn-info" @onclick="@(() => Counters.Remove(local))">
+            Reset
+        </button>
         <span class="p-2">Counter Value: @GetCounter(i)</span>
     </div>
 }
