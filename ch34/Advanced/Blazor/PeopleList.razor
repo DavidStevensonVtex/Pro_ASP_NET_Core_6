@@ -17,14 +17,17 @@
     </tbody>
 </table>
 
-<SelectFilter Values="@Cities" Title="City" />
+<SelectFilter Values="@Cities" Title="@SelectTitle" />
 
 @code {
     [Inject]
     public DataContext? Context { get; set; }
 
     public IEnumerable<Person>? People =>
-        Context?.People.Include(p => p.Department).Include(p => p.Location);
+        Context?.People
+            .Include(p => p.Department)
+            .Include(p => p.Location)
+            .Take(ItemCount);
 
     public IEnumerable<string>? Cities => Context?.Locations.Select(l => l.City);
 
@@ -32,4 +35,10 @@
 
     public string GetClass(string? city) =>
         SelectedCity == city ? "bg-info text-white" : "";
+
+    [Parameter]
+    public int ItemCount { get; set; } = 4;
+
+    [Parameter]
+    public string? SelectTitle { get; set; }
 }
